@@ -8,7 +8,7 @@ A production-quality AI agent that provides instant, accurate banking support fo
 
 ## Live Demo
 
-> **Streamlit URL:** *(set after deploying to Streamlit Community Cloud)*
+> **Streamlit URL:** https://agent4lenadenabank.streamlit.app/
 
 ---
 
