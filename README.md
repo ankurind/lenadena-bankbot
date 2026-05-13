@@ -1,0 +1,173 @@
+# LenaDena BankBot — AI Banking Support & Advisory Agent
+
+**IITM Agentic AI Industry Capstone | Scenario 2: Banking (Non-Transactional)**
+
+A production-quality AI agent that provides instant, accurate banking support for LenaDena Bank customers — covering accounts, FD rates, loans, credit cards, and policies — while strictly refusing any transactional or high-risk requests.
+
+---
+
+## Live Demo
+
+> **Streamlit URL:** *(set after deploying to Streamlit Community Cloud)*
+
+---
+
+## Architecture
+
+```
+User Query
+     │
+[Triage Agent]  (LangGraph node)
+  ├── Programmatic safety check (regex rules)
+  ├── LLM intent classification
+  └── Route: REFUSE | ESCALATE | PROCEED
+          │              │              │
+       [Refuse]     [Escalate]   [Advisory Agent]
+       response      response     ├── RAG: Chroma vector store
+                                  ├── Tools: search_kb, get_rates, escalate, eligibility
+                                  └── Draft response
+                                           │
+                                   [Review Node]
+                                   Safety review → Final response
+```
+
+**Stack:** LangChain · LangGraph · OpenAI GPT-4o-mini · Chroma · Streamlit · LangSmith
+
+---
+
+## Quick Start
+
+### 1. Clone and install
+
+```bash
+git clone <your-repo-url>
+cd capstone
+pip install -r requirements.txt
+```
+
+### 2. Set API keys
+
+```bash
+cp .env.example .env
+# Edit .env:
+# OPENAI_API_KEY=sk-...
+# LANGCHAIN_API_KEY=ls__...
+```
+
+### 3. Run the Streamlit app
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+### 4. Run individual phase scripts (development / evidence)
+
+```bash
+python phases/phase2_baseline.py       # No API key needed
+python phases/phase3_llm_prompting.py  # Requires OPENAI_API_KEY
+python phases/phase4_rag.py
+# ... etc
+```
+
+### 5. Run all phases and capture output
+
+```bash
+python run_all.py                  # Runs phases 2-9, saves logs/phaseN_output.txt
+python run_all.py --phase 2        # Run only phase 2
+python run_all.py --phase 4 5 6    # Run phases 4, 5, 6
+```
+
+The Streamlit **Phase Evidence** tab reads these output files to show captured results.
+
+---
+
+## Project Structure
+
+```
+capstone/
+├── agent/                    # Core agent package
+│   ├── safety.py             # Safety guardrails + PII scrubber
+│   ├── tools.py              # Tool definitions (@tool decorators)
+│   ├── retrieval.py          # RAG pipeline (Chroma + OpenAI embeddings)
+│   ├── graph.py              # LangGraph StateGraph (Triage + Advisory)
+│   ├── memory.py             # Short-term + long-term memory
+│   ├── feedback.py           # Feedback store + adaptive behaviour
+│   └── logging_utils.py      # PII-safe structured logger
+│
+├── phases/                   # Phase scripts (one per capstone phase)
+│   ├── phase2_baseline.py    # Rule-based agent + limitations
+│   ├── phase3_llm_prompting.py  # 3 prompt variants + comparison table
+│   ├── phase4_rag.py         # RAG pipeline demo
+│   ├── phase5_tools.py       # Tool calling + safeguards
+│   ├── phase6_memory_planning.py  # LangGraph + memory
+│   ├── phase7_adaptive.py    # Feedback-driven adaptation
+│   ├── phase8_deployment.py  # Production wrapper + logging
+│   └── phase9_evaluation.py  # 15-question eval + root cause analysis
+│
+├── app/                      # Streamlit application
+│   ├── streamlit_app.py      # Main chat page
+│   └── pages/
+│       ├── 1_Phase_Evidence.py     # Source + captured output per phase
+│       └── 2_Evaluation_Report.py  # Metrics dashboard
+│
+├── notebooks/
+│   └── phase1_problem_framing.md   # Problem framing document
+│
+├── data/                     # Synthetic LenaDena Bank documents
+│   ├── faq.json              # 20 FAQ Q&A pairs
+│   ├── products.json         # FD rates, loans, credit cards, savings
+│   └── policies.md           # Account closure, dispute, loan policies
+│
+├── logs/                     # Runtime artefacts (gitignored)
+│   ├── phaseN_output.txt     # Captured output from run_all.py
+│   ├── interactions.jsonl    # PII-safe interaction log
+│   ├── feedback_store.json   # Feedback by topic
+│   ├── user_preferences.json # Long-term memory
+│   └── eval_results.json     # Phase 9 evaluation metrics
+│
+├── run_all.py                # Phase orchestrator
+├── requirements.txt
+└── .env.example
+```
+
+---
+
+## Deploying to Streamlit Community Cloud
+
+1. Push this repo to GitHub (public)
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. **New app** → repo → **Main file path:** `app/streamlit_app.py`
+4. **Settings → Secrets:**
+   ```toml
+   OPENAI_API_KEY = "sk-..."
+   LANGCHAIN_API_KEY = "ls__..."
+   LANGCHAIN_TRACING_V2 = "true"
+   LANGCHAIN_PROJECT = "lenadena-bankbot"
+   ```
+5. Click **Deploy** — the Chroma vector store rebuilds automatically on first request (~10s).
+
+For the Phase Evidence page to show output, commit the `logs/phaseN_output.txt` files
+generated by `python run_all.py` before pushing.
+
+---
+
+## Safety Enforcement
+
+| Requirement | Implementation |
+|---|---|
+| Refuse money movement / approvals | `check_safety()` regex + Triage Agent routing |
+| No hallucination of bank data | RAG "only use provided context" instruction |
+| Escalate high-risk cases | `escalate_to_human` tool + auto-escalation patterns |
+| No PII in logs | SHA-256 query hash + PII scrubber in `logging_utils.py` |
+
+---
+
+## Engineering & Product Justification
+
+**LangChain + LangGraph (Track A):** LangChain provides `ChatOpenAI`, `@tool`, `AgentExecutor`, `Chroma`, `OpenAIEmbeddings` — eliminating boilerplate. LangGraph provides typed `AgentState`, `StateGraph` with conditional edges — making the multi-agent flow auditable (every node traced in LangSmith) and testable (nodes can be unit-tested independently).
+
+**GPT-4o-mini (default):** Low latency (~1–2s), low cost, strong instruction-following for safety prompts. GPT-4o reserved for complex multi-step reasoning.
+
+**LangSmith:** Every LangGraph node auto-traced (`LANGCHAIN_TRACING_V2=true`) with zero additional code — critical for Phase 9 root cause analysis.
+
+**Streamlit Community Cloud:** Free public URL, GitHub-connected CI/CD, secrets management via dashboard (API keys never in code).

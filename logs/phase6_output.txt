@@ -1,0 +1,178 @@
+======================================================================
+PHASE 6: LANGGRAPH MULTI-AGENT + MEMORY — LenaDena BankBot
+======================================================================
+
+Architecture:
+  User Query
+       │
+  [Triage Agent]
+    ├── Programmatic safety check (regex rules)
+    ├── LLM intent classification
+    └── Route: REFUSE | ESCALATE | PROCEED
+            │              │              │
+         [Refuse]     [Escalate]   [Advisory Agent]
+         response      response     ├── RAG retrieval (Chroma)
+                                    ├── Tool selection & calling
+                                    └── Draft response
+                                             │
+                                     [Review Node]
+                                     Safety review → Final response
+
+State fields:
+  query, session_id, intent, safety_verdict, retrieved_docs,
+  tool_calls_made, draft_response, final_response,
+  short_term_history (last 6 turns), long_term_prefs
+
+
+======================================================================
+[1/5] Single query — full graph trace
+======================================================================
+Query:          What are the LenaDena Bank FD rates for 1 year and 2 years?
+Intent:         fd_info
+Safety verdict: PROCEED
+Tools used:     ['get_product_rates', 'search_knowledge_base']
+
+Final response:
+The response contains specific interest rates for fixed deposits, which may not be up-to-date or accurate. Additionally, it does not include a disclaimer regarding the potential for changes in rates or the need for customers to verify current rates directly with the bank.
+
+Here’s a revised version of the response:
+
+---
+
+Thank you for your inquiry about the LenaDena Bank Fixed Deposit rates for 1 year and 2 years. 
+
+As of the latest information available, the rates are as follows:
+
+- For a tenure of **1 year**:
+  - General: **6.80%**
+  - Senior Citizen: **7.30%**
+
+- For a tenure of **2 years**:
+  - General: **7.20%** (for 18 months 1 day to 2 years)
+  - Senior Citizen: **7.70%** (for 18 months 1 day to 2 years)
+
+Please note that these rates are subject to change and may vary based on specific terms and conditions. We recommend checking directly with LenaDena Bank for the most current rates and any additional details.
+
+Thank you for considering LenaDena Bank for your financial needs!
+
+--- 
+
+This version maintains professionalism and clarity while ensuring that the information is presented with a disclaimer about potential changes.
+
+======================================================================
+[2/5] Multi-step reasoning — Card vs Loan comparison
+======================================================================
+Query: Should I get a credit card or a personal loan for a ₹50,000 expense? What are the costs?
+Intent: loan_info | Tools: ['check_eligibility_info']
+
+Final response:
+The draft response contains specific eligibility criteria and costs associated with credit cards and personal loans, which may be interpreted as financial advice. Additionally, it includes specific interest rates that could be subject to change and may not reflect the most current offerings. 
+
+Here’s a revised version that maintains professionalism while ensuring safety:
+
+---
+
+To decide between a credit card and a personal loan for a ₹50,000 expense, it's important to consider the general costs and eligibility criteria for each option. Please note that specific terms may vary, and it's advisable to check with LenaDena Bank for the most accurate and up-to-date information.
+
+### Credit Card
+- **Eligibility**:
+  - Income requirements vary by card type.
+  - Minimum CIBIL score: 700
+  - Age: 18+ years
+
+- **Costs**:
+  - Annual fees may apply.
+  - Interest rates typically vary based on the outstanding balance and payment history.
+
+### Personal Loan
+- **Eligibility**:
+  - Age: Generally 21–60 years for salaried individuals, and up to 65 years for self-employed individuals.
+  - Minimum income requirements apply.
+  - Minimum CIBIL score: 700
+
+- **Costs**:
+  - Interest rates may vary.
+  - Processing fees may apply based on the loan amount.
+
+### Conclusion
+- If you can pay off the credit card balance quickly, it may offer flexibility. However, if you prefer a structured repayment plan, a personal loan could be more suitable.
+- Be sure to consider any applicable fees when making your decision.
+
+For personalized advice tailored to your financial situation, please contact LenaDena Bank directly.
+
+---
+
+This version removes specific rates and eligibility details while encouraging the user to seek personalized advice, ensuring compliance with safety standards.
+
+======================================================================
+[3/5] Multi-turn conversation — 5 turns with context carryover
+======================================================================
+
+Turn 1
+  User:    I'm looking at LenaDena Bank FD options.
+  BankBot: The response contains specific interest rates for Fixed Deposit options, which may not be current or accurate. Additionally, it does not include a disclaimer regarding the potential for changes in rat
+
+Turn 2
+  User:    What's the rate for 2 years?
+  BankBot: The draft response contains specific interest rates for Fixed Deposits, which may be subject to change. However, it does not contain any unsafe content regarding money movement, approval language, or 
+
+Turn 3
+  User:    And what about the premature withdrawal penalty?
+  BankBot: The draft response contains specific penalty rates and conditions related to Fixed Deposits, which could be considered sensitive information. Additionally, it may imply a level of authority that could
+
+Turn 4
+  User:    Is the penalty different for senior citizens?
+  BankBot: The response contains specific details about penalties and rates that may not be accurate or applicable to all situations, which could mislead customers. Additionally, it does not include a disclaimer
+
+Turn 5
+  User:    Good to know. Now, what credit cards does LenaDena offer?
+  BankBot: The response is safe and does not contain any unsafe content, hallucinated rates or policies, or PII. However, I will improve clarity slightly.
+
+Here’s the revised response:
+
+I couldn't find specific 
+
+  Short-term memory now holds 10 messages.
+
+======================================================================
+[4/5] Memory comparison — WITH vs WITHOUT context
+======================================================================
+WITHOUT MEMORY:
+  Q: 'And what about the penalty?'
+  A: Thank you for your inquiry regarding the penalties for premature withdrawal of Fixed Deposits (FDs) at LenaDena Bank. 
+
+Please note that LenaDena Bank does impose penalties for premature withdrawals a
+
+WITH MEMORY (after 2 FD-related turns):
+  Q: 'And what about the penalty?'
+  A: The draft response contains specific penalty rates and conditions related to Fixed Deposits, which may be considered sensitive information. Additionally, it includes a statement about senior citizens 
+
+======================================================================
+[5/5] Long-term memory — preference persistence across sessions
+======================================================================
+Saved preferences for session 704c1b32: {'product_interest': 'Fixed Deposits', 'preferred_tenure': '1-2 years'}
+
+Q: 'What would you recommend for me?' (with long-term prefs loaded)
+A: Thank you for your inquiry! Based on your known preferences, I would recommend considering Fixed Deposits with a tenure of 1-2 years. Fixed Deposits typically offer a safe investment option with guaranteed returns over the specified period. 
+
+Please note that I cannot provide specific details about 
+
+======================================================================
+MEMORY SUMMARY
+======================================================================
+
+| Capability              | Implementation                          | Evidence              |
+|-------------------------|-----------------------------------------|-----------------------|
+| Multi-agent flow        | LangGraph StateGraph (5 nodes)          | Graph trace above     |
+| Intent classification   | Triage Agent → LLM                      | intent field in state |
+| Safety gate             | Triage + check_safety() regex           | REFUSE/ESCALATE route |
+| RAG in advisory         | Chroma retrieval → context injection    | retrieved_docs field  |
+| Tool use in advisory    | create_openai_tools_agent               | tool_calls_made field |
+| Post-response review    | Review node (Triage 2nd pass)           | draft vs final resp.  |
+| Short-term memory       | ShortTermMemory(k=6) sliding window     | Turn 3 refs Turn 1    |
+| Long-term memory        | JSON file logs/user_preferences.json    | Prefs across sessions |
+| Memory reset rule       | Short-term: new instance; Long-term: persistent file |          |
+| Multi-step reasoning    | Advisory decomposes complex query       | Card vs loan compare  |
+
+
+--- Completed in 115.0s ---

@@ -1,0 +1,89 @@
+======================================================================
+PHASE 7: ADAPTIVE BEHAVIOUR — LenaDena BankBot
+======================================================================
+
+Adaptive Behaviour Logic:
+  - Each response can receive thumbs-up (good) or thumbs-down (bad) feedback
+  - Feedback stored in logs/feedback_store.json keyed by topic
+  - Topics: fd, credit_card, personal_loan, savings, dispute, eligibility, etc.
+  - When a topic reaches 2+ thumbs-down → enters "low confidence" mode
+  - Low confidence mode: appends a disclaimer + human advisor referral to responses
+
+======================================================================
+[1/4] BEFORE — No negative feedback yet
+======================================================================
+Query: Am I eligible for a personal loan at LenaDena Bank?
+
+Response:
+To be eligible for a personal loan at LenaDena Bank, you need to meet the following criteria:
+
+- **Age**: 21–60 years (salaried) or 21–65 years (self-employed)
+- **Minimum Monthly Income**: ₹25,000 (salaried) or ₹3 lakh annual (self-employed)
+- **Minimum CIBIL Score**: 700
+- **Minimum Employment**: 1 year with current employer (salaried) or 2 years in business (self-employed)
+
+Please note that meeting these criteria does not guarantee loan approval, as the final decision depends on LenaDena Bank's credit assessment.
+
+If you have any further questions or need assistance, feel free to reach out. Thank you for considering LenaDena Bank for your financial needs!
+
+Disclaimer added: No
+
+======================================================================
+[2/4] Simulating 2 thumbs-down on 'personal_loan' topic
+======================================================================
+Feedback recorded.
+Low confidence topics now: {'personal_loan'}
+Is personal loan query low confidence? True
+
+======================================================================
+[3/4] AFTER — 2 thumbs-down → disclaimer appended
+======================================================================
+Query: Am I eligible for a personal loan at LenaDena Bank?
+
+Response:
+To be eligible for a personal loan at LenaDena Bank, you need to meet the following criteria:
+
+- **Age**: 21–60 years (salaried) or 21–65 years (self-employed)
+- **Minimum Monthly Income**: ₹25,000 (salaried) or ₹3 lakh annual (self-employed)
+- **Minimum CIBIL Score**: 700
+- **Minimum Employment**: 1 year with current employer (salaried) or 2 years in business (self-employed)
+
+Please note that meeting these criteria does not guarantee loan approval, as the final decision depends on LenaDena Bank's credit assessment.
+
+If you have any further questions or need assistance, feel free to reach out!
+
+Thank you for considering LenaDena Bank for your financial needs.
+
+---
+⚠️ **Note:** Some customers have found answers on this topic unclear. For the most accurate and personalised information, I recommend speaking with a LenaDena Bank advisor: 📞 1800-123-5362 or visit your nearest branch.
+
+Disclaimer added: Yes
+
+======================================================================
+[4/4] Feedback Summary
+======================================================================
+Topic                👍      👎      Mode
+--------------------------------------------------
+personal_loan        0      2      ⚠️  ADAPTIVE (disclaimer)
+fd                   1      0      ✅ Normal
+dispute              1      0      ✅ Normal
+
+======================================================================
+BEFORE vs AFTER COMPARISON TABLE
+======================================================================
+
+| Aspect                 | Before (0 thumbs-down)   | After (2 thumbs-down)             |
+|------------------------|--------------------------|-----------------------------------|
+| Core response          | Eligibility information  | Same eligibility information      |
+| Disclaimer appended    | No                       | Yes                               |
+| Escalation suggestion  | No                       | Yes — "call 1800-123-5362"        |
+| Behaviour trigger      | None                     | Topic has ≥2 negative ratings     |
+| Storage                | N/A                      | logs/feedback_store.json          |
+| Persistence            | N/A                      | Persists across sessions          |
+
+What changed: the agent appends a disclaimer for any query under the 'personal_loan' topic.
+Why this approach: transparent to the user — they see this topic has been unclear for others,
+which increases trust rather than silently changing tone.
+
+
+--- Completed in 21.6s ---

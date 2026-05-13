@@ -1,0 +1,65 @@
+======================================================================
+PHASE 2: BASELINE RULE-BASED AGENT — LenaDena BankBot
+======================================================================
+
+Q: What are the FD interest rates at LenaDena Bank?
+A: LenaDena Bank FD rates: 1 year = 6.80%, 2 years = 7.20%, 3 years = 7.10%, 5 years (tax-saving) = 7.00%. Senior citizens get +0.50%. Minimum deposit: ₹1,000.
+   [MATCHED] latency=0ms
+
+Q: Tell me about credit cards available.
+A: I'm sorry, I don't have information about that. Please call 1800-123-5362 or visit your nearest LenaDena Bank branch.
+   [FALLBACK (no keyword match)] latency=0ms
+
+Q: What is the minimum balance for a savings account?
+A: LenaDena Bank Savings Account interest: 3.5% p.a. up to ₹1 lakh, 4.0% above ₹1 lakh. Minimum balance: ₹1,000 (metro).
+   [MATCHED] latency=0ms
+
+Q: What is the rate on deposits?
+A: I'm sorry, I don't have information about that. Please call 1800-123-5362 or visit your nearest LenaDena Bank branch.
+   [FALLBACK (no keyword match)] latency=0ms
+
+Q: How much interest do I earn on money kept in the bank?
+A: I'm sorry, I don't have information about that. Please call 1800-123-5362 or visit your nearest LenaDena Bank branch.
+   [FALLBACK (no keyword match)] latency=0ms
+
+Q: I want to compare home loan rates and also understand the FD premature withdrawal penalty.
+A: LenaDena Bank FD rates: 1 year = 6.80%, 2 years = 7.20%, 3 years = 7.10%, 5 years (tax-saving) = 7.00%. Senior citizens get +0.50%. Minimum deposit: ₹1,000.
+   [MATCHED] latency=0ms
+
+Logged 6 interactions → /Users/ankurindrakush/all-dev-work/iitm-agentic-ai/Capstone/logs/phase2_interactions.json
+
+======================================================================
+DEMONSTRATED LIMITATIONS
+======================================================================
+
+Limitation 1 — Cannot handle paraphrase:
+  "What is the rate on deposits?" and "How much interest do I earn on money
+  kept in the bank?" both ask for FD/savings rates, but the keywords 'fd'
+  and 'fixed deposit' are absent — agent returns fallback.
+
+  | Query                                  | Expected    | Actual        |
+  |----------------------------------------|-------------|---------------|
+  | "What are the FD interest rates?"      | FD rates    | CORRECT       |
+  | "What is the rate on deposits?"        | FD rates    | FALLBACK ❌   |
+  | "How much interest on money in bank?"  | FD/savings  | FALLBACK ❌   |
+
+Limitation 2 — Cannot handle multi-intent:
+  "I want to compare home loan rates AND understand FD premature penalty"
+  has two distinct intents. The rule engine matches only the first keyword
+  hit (home loan) and silently ignores the second intent (FD penalty).
+
+  | Query                                       | Expected        | Actual       |
+  |---------------------------------------------|-----------------|--------------|
+  | Home loan + FD penalty (single query)       | Answer both     | Home loan only ❌ |
+
+Additional implicit limitations:
+  - No memory: every query is stateless
+  - Cannot reason across products (e.g., "which card is better for a traveller?")
+  - Brittle to typos and word-order variation
+  - Adding new products requires writing new rules for every phrasing variant
+
+Conclusion: Rule-based agents cannot serve real users. LLM integration is required
+(addressed in Phase 3).
+
+
+--- Completed in 0.0s ---

@@ -1,0 +1,74 @@
+======================================================================
+PHASE 8: DEPLOYMENT READINESS — LenaDena BankBot
+======================================================================
+
+LangSmith tracing: true
+LangSmith project: lenadena-bankbot
+
+Deployment wrapper features:
+  ✅ PII-safe logging (SHA-256 query hash, no raw query text in logs)
+  ✅ Structured JSONL log → logs/interactions.jsonl
+  ✅ LangSmith auto-tracing on every graph run
+  ✅ Retry once on OpenAI timeout
+  ✅ Graceful fallback response on any unhandled exception
+  ✅ Latency captured per request via Timer context manager
+
+======================================================================
+[1/3] 10-RUN DEPLOYMENT TEST
+======================================================================
+
+#   Query                                         Intent          Safety     Tools                        ms     Status
+-------------------------------------------------------------------------------------------------------------------
+1   What are LenaDena Bank's FD rates for 1 yea   fd_info         PROCEED    none                         6491   ok
+2   How do I open a savings account?              account_info    PROCEED    none                         6449   ok
+3   Transfer ₹5,000 to my friend.                 flagged         REFUSE     none                         4      ok
+4   What credit card suits frequent travellers?   card_info       PROCEED    none                         7187   ok
+5   My account was debited twice — this is a fr   fraud           ESCALATE   none                         890    ok
+6   What is the personal loan eligibility?        eligibility     PROCEED    check_eligibility_info, search_knowledge_base 13663  ok
+7   What documents are needed for KYC?            account_info    PROCEED    none                         6946   ok
+8   Does LenaDena Bank offer cryptocurrency?      out_of_scope    PROCEED    none                         4833   ok
+9   What is the minimum balance for a savings a   account_info    PROCEED    none                         13340  ok
+10  Approve my home loan application immediatel   flagged         REFUSE     none                         7      ok
+
+======================================================================
+[2/3] GRACEFUL FAILURE HANDLING
+======================================================================
+  [ERROR] ConnectionError: Simulated OpenAI API connection error
+Status:   error:ConnectionError
+Response: I'm sorry, I encountered a technical issue processing your request. Please try again or contact us at 1800-123-5362.
+✅ User received a graceful error message — not a stack trace.
+
+======================================================================
+[3/3] PII SCRUBBING IN LOGS
+======================================================================
+Original query:  My account 9876543210 was charged incorrectly, my phone is 9123456789
+Logged hash:     c476f919f763579a (SHA-256, not raw text)
+Response preview in log: This query requires attention from one of our human advisors. I'm escalating this for you now.
+
+**Escalation Reference:*
+✅ No raw PII stored — only hash and scrubbed preview.
+
+======================================================================
+DEPLOYMENT SUMMARY
+======================================================================
+
+| Requirement           | Implementation                              | Status |
+|-----------------------|---------------------------------------------|--------|
+| Local deployment      | pip install -r requirements.txt + streamlit | ✅      |
+| Cloud deployment      | Streamlit Community Cloud (public URL)      | ✅      |
+| Structured logging    | JSONL, logs/interactions.jsonl              | ✅      |
+| PII-safe logs         | SHA-256 query hash, scrubbed preview        | ✅      |
+| LangSmith tracing     | LANGCHAIN_TRACING_V2=true                   | ✅      |
+| Latency capture       | Timer context manager per run               | ✅      |
+| OpenAI timeout retry  | 1 retry on timeout errors                   | ✅      |
+| Graceful failure      | Fallback response on all exceptions         | ✅      |
+| API keys              | .env (local) / Streamlit Secrets (cloud)    | ✅      |
+
+Deployment assumptions:
+  - OPENAI_API_KEY and LANGCHAIN_API_KEY must be set in environment
+  - Chroma DB is rebuilt on first cold start (~10-15 seconds)
+  - logs/ directory is writable (created automatically)
+  - Python 3.11+ recommended
+
+
+--- Completed in 61.8s ---

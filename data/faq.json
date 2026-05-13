@@ -1,0 +1,122 @@
+[
+  {
+    "id": "faq_001",
+    "category": "Account Opening",
+    "question": "How do I open a savings account at LenaDena Bank?",
+    "answer": "You can open a savings account at LenaDena Bank by visiting any branch with a valid government-issued photo ID (Aadhaar, PAN, Passport, or Voter ID), address proof, and a passport-size photograph. Alternatively, you can open an account online through our website or mobile app using Video KYC. The minimum opening balance for a Regular Savings Account is ₹1,000 and for a Premium Savings Account is ₹10,000."
+  },
+  {
+    "id": "faq_002",
+    "category": "Account Opening",
+    "question": "What documents are required for KYC at LenaDena Bank?",
+    "answer": "For KYC at LenaDena Bank, you need: (1) Identity Proof — Aadhaar card, PAN card, Passport, or Voter ID. (2) Address Proof — Aadhaar card, utility bill (not older than 3 months), rental agreement, or bank statement. (3) One recent passport-size photograph. For business accounts, additional documents like GST registration, business registration certificate, and board resolution may be required."
+  },
+  {
+    "id": "faq_003",
+    "category": "Net Banking",
+    "question": "How do I activate LenaDena Bank's internet banking?",
+    "answer": "To activate LenaDena Bank internet banking: (1) Visit lenadenapank.in/netbanking. (2) Click 'New User Registration'. (3) Enter your account number and registered mobile number. (4) Verify with the OTP sent to your mobile. (5) Set your login ID and password. Alternatively, visit your nearest branch and request internet banking activation at the customer service desk. You will receive your temporary login credentials within 24 hours."
+  },
+  {
+    "id": "faq_004",
+    "category": "Net Banking",
+    "question": "What can I do through LenaDena Bank's mobile app?",
+    "answer": "LenaDena Bank's mobile app (LenaApp) allows you to: view account balance and mini-statement, download account statements, pay utility bills, recharge prepaid mobile and DTH, apply for FDs and RDs, view credit card statements and due dates, raise service requests and complaints, update communication address, and contact customer support. Note: The app does not allow fund transfers above ₹2 lakh without branch MPIN authentication."
+  },
+  {
+    "id": "faq_005",
+    "category": "Credit Card",
+    "question": "What credit cards does LenaDena Bank offer?",
+    "answer": "LenaDena Bank offers four credit card variants: (1) LenaDena Classic — entry-level, annual fee ₹500, 1% cashback on all spends. (2) LenaDena Select — mid-tier, annual fee ₹1,500, 2% cashback + airport lounge access (4 visits/year). (3) LenaDena Platinum — premium, annual fee ₹3,000, 3% cashback + unlimited lounge access + concierge service. (4) LenaDena Business — for self-employed, annual fee ₹2,000, expense management tools + 2.5% cashback on business spends."
+  },
+  {
+    "id": "faq_006",
+    "category": "Credit Card",
+    "question": "What is the credit limit on LenaDena Bank credit cards?",
+    "answer": "Credit limits on LenaDena Bank credit cards are determined based on your income, credit score (CIBIL), existing liabilities, and banking relationship with us. Typical ranges: Classic — ₹25,000 to ₹1 lakh; Select — ₹50,000 to ₹3 lakh; Platinum — ₹1 lakh to ₹10 lakh; Business — ₹50,000 to ₹5 lakh. For an accurate limit estimate, apply through our website or visit a branch. We cannot confirm your specific limit without a formal credit assessment."
+  },
+  {
+    "id": "faq_007",
+    "category": "Credit Card",
+    "question": "How do I report a lost or stolen LenaDena Bank credit card?",
+    "answer": "To report a lost or stolen LenaDena Bank credit card: (1) Immediately call our 24x7 helpline at 1800-123-LENA (1800-123-5362). (2) Use the LenaApp under Card Services → Block Card. (3) Log into net banking under Cards → Hotlist Card. Your card will be blocked instantly upon report. A replacement card will be dispatched within 5-7 business days. There is no fee for the first replacement; subsequent replacements are ₹200 each."
+  },
+  {
+    "id": "faq_008",
+    "category": "Loans",
+    "question": "What types of loans does LenaDena Bank offer?",
+    "answer": "LenaDena Bank offers the following retail loan products: (1) Home Loan — up to ₹5 crore, tenure up to 30 years. (2) Personal Loan — up to ₹20 lakh, tenure up to 5 years. (3) Car Loan — up to ₹30 lakh (new), ₹15 lakh (used), tenure up to 7 years. (4) Education Loan — up to ₹75 lakh for abroad studies, ₹20 lakh for India. (5) Loan Against Property — up to 70% of property value, tenure up to 15 years. (6) Gold Loan — up to 75% of gold value, tenure up to 3 years."
+  },
+  {
+    "id": "faq_009",
+    "category": "Loans",
+    "question": "What is the general eligibility for a personal loan at LenaDena Bank?",
+    "answer": "General eligibility for a LenaDena Bank Personal Loan: Age 21–60 years (salaried) or 21–65 years (self-employed). Minimum monthly income: ₹25,000 (salaried) or ₹3 lakh annual (self-employed). Minimum CIBIL score: 700. Minimum employment: 1 year with current employer (salaried) or 2 years in business (self-employed). Indian resident. Note: Meeting these criteria does not guarantee loan approval — final decision depends on LenaDena Bank's credit assessment."
+  },
+  {
+    "id": "faq_010",
+    "category": "Fixed Deposits",
+    "question": "How do I open a Fixed Deposit at LenaDena Bank?",
+    "answer": "You can open a Fixed Deposit at LenaDena Bank through: (1) LenaApp → Investments → Open FD. (2) Net Banking → Deposits → New FD. (3) Visit any branch. Minimum deposit amount: ₹1,000. Maximum: No limit. You can choose cumulative (interest paid at maturity) or non-cumulative (interest paid monthly, quarterly, or annually). Auto-renewal can be set at the time of booking."
+  },
+  {
+    "id": "faq_011",
+    "category": "Fixed Deposits",
+    "question": "Is there a penalty for premature FD withdrawal at LenaDena Bank?",
+    "answer": "Yes, LenaDena Bank charges a premature withdrawal penalty on Fixed Deposits. For deposits held less than 1 year: 0.5% reduction on the applicable rate. For deposits held 1 year or more: 1% reduction on the applicable rate. Tax-saving FDs (5-year lock-in) cannot be prematurely withdrawn. Senior citizens do not face any premature withdrawal penalty. The effective interest is recalculated at the rate applicable to the period actually held, minus the penalty."
+  },
+  {
+    "id": "faq_012",
+    "category": "Fixed Deposits",
+    "question": "Are LenaDena Bank FD interest rates guaranteed?",
+    "answer": "Yes, the interest rate on your LenaDena Bank Fixed Deposit is locked at the rate prevailing on the date of booking and will not change during the tenure. Rate changes announced after booking do not affect existing FDs. Rates for new FDs will reflect any revised schedule. We recommend checking our latest rate card on the website or app before booking."
+  },
+  {
+    "id": "faq_013",
+    "category": "Account Services",
+    "question": "How do I update my mobile number in LenaDena Bank?",
+    "answer": "To update your registered mobile number with LenaDena Bank: visit your home branch with your account passbook and valid photo ID. Fill out the 'Change of Mobile Number' request form. The update takes 1–2 working days. Mobile number cannot be changed remotely through app or net banking for security reasons — it must be done in person at the branch. Senior citizens can request a home visit by calling 1800-123-5362."
+  },
+  {
+    "id": "faq_014",
+    "category": "Account Services",
+    "question": "How do I close my LenaDena Bank savings account?",
+    "answer": "To close a LenaDena Bank savings account: visit the home branch in person with your passbook, debit card (cut), and photo ID. Submit a written closure request. Accounts closed within 12 months of opening are charged a ₹300 closure fee. Accounts open for over 12 months are closed free of charge. Outstanding dues must be cleared before closure. Closure is processed within 3-5 working days and the balance is paid via cheque or NEFT to another account."
+  },
+  {
+    "id": "faq_015",
+    "category": "Disputes",
+    "question": "How do I dispute an incorrect charge on my LenaDena Bank credit card?",
+    "answer": "To dispute a charge on your LenaDena Bank credit card: (1) Log into net banking → Cards → Dispute Transaction. (2) Call 1800-123-5362 within 30 days of the statement date. (3) Visit any branch and submit a written dispute form. You will receive an acknowledgement within 2 business days. Investigation takes 7–21 working days. During investigation, the disputed amount is provisionally reversed. You will be notified of the resolution via SMS and email."
+  },
+  {
+    "id": "faq_016",
+    "category": "Savings Account",
+    "question": "What is the minimum balance requirement for LenaDena Bank savings accounts?",
+    "answer": "LenaDena Bank minimum balance requirements: Regular Savings Account — ₹1,000 (metro/urban), ₹500 (semi-urban/rural). Premium Savings Account — ₹10,000 (all locations). Senior Citizen Savings Account — no minimum balance. Student Savings Account (18–25 years) — no minimum balance. Zero Balance Account (for salary credits above ₹15,000/month) — no minimum balance. Non-maintenance charge: ₹100–₹500 per month depending on shortfall."
+  },
+  {
+    "id": "faq_017",
+    "category": "Savings Account",
+    "question": "What interest rate does LenaDena Bank pay on savings accounts?",
+    "answer": "LenaDena Bank savings account interest rates: Regular Savings Account — 3.5% p.a. on balances up to ₹1 lakh, 4.0% p.a. above ₹1 lakh. Premium Savings Account — 4.5% p.a. on all balances. Senior Citizen Savings Account — additional 0.5% p.a. over standard rates. Interest is calculated on daily balance and credited quarterly. Rates are variable and subject to change with prior notice."
+  },
+  {
+    "id": "faq_018",
+    "category": "Customer Support",
+    "question": "How do I contact LenaDena Bank customer support?",
+    "answer": "LenaDena Bank customer support channels: (1) 24x7 Helpline: 1800-123-5362 (toll-free). (2) Email: support@lenadenbank.in (response within 2 business days). (3) Live Chat: Available on website and LenaApp, 8 AM – 10 PM daily. (4) Branch Visit: Locate nearest branch on our website. (5) Relationship Manager: Assigned to Premium and Priority account holders. For escalation, write to grievance.officer@lenadenbank.in."
+  },
+  {
+    "id": "faq_019",
+    "category": "Digital Payments",
+    "question": "Does LenaDena Bank support UPI payments?",
+    "answer": "Yes, LenaDena Bank is a UPI-enabled bank. Your UPI ID is automatically created when you register the LenaApp — typically in the format yourname@lenadena. You can send and receive money 24x7, link multiple LenaDena Bank accounts, and use any UPI app (GPay, PhonePe, Paytm) with your LenaDena Bank account. Daily UPI transaction limit: ₹1 lakh per account. BHIM UPI for business: ₹2 lakh per transaction."
+  },
+  {
+    "id": "faq_020",
+    "category": "Safety & Fraud",
+    "question": "What should I do if I suspect fraud on my LenaDena Bank account?",
+    "answer": "If you suspect fraud on your LenaDena Bank account: (1) Immediately call 1800-123-5362 — our fraud response team is available 24x7. (2) Block your card instantly via LenaApp → Card Services → Block Card. (3) Change your net banking and app password immediately. (4) Do NOT share OTPs, PINs, or passwords with anyone — LenaDena Bank will never ask for these. (5) File a complaint at cybercrime.gov.in. We will initiate a fraud investigation within 24 hours of your report."
+  }
+]

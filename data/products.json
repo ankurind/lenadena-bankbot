@@ -1,0 +1,196 @@
+{
+  "savings_accounts": [
+    {
+      "name": "Regular Savings Account",
+      "min_balance_metro": 1000,
+      "min_balance_rural": 500,
+      "interest_rate_upto_1lakh": "3.5% p.a.",
+      "interest_rate_above_1lakh": "4.0% p.a.",
+      "interest_credit": "Quarterly",
+      "debit_card": "LenaDena Classic Debit Card (included)",
+      "features": ["Free monthly e-statement", "5 free ATM transactions/month", "Net banking and mobile app"]
+    },
+    {
+      "name": "Premium Savings Account",
+      "min_balance": 10000,
+      "interest_rate": "4.5% p.a. on all balances",
+      "interest_credit": "Quarterly",
+      "debit_card": "LenaDena Platinum Debit Card (included)",
+      "features": ["Unlimited free ATM transactions", "Dedicated relationship manager", "Priority branch service", "Complimentary airport lounge (2/year)"]
+    },
+    {
+      "name": "Senior Citizen Savings Account",
+      "min_balance": 0,
+      "interest_rate": "4.0% p.a. up to ₹1L, 4.5% p.a. above ₹1L",
+      "interest_credit": "Quarterly",
+      "additional_benefit": "Extra 0.5% interest over standard rates",
+      "features": ["No minimum balance", "Free home banking service (up to 4 visits/year)", "Doorstep cheque collection"]
+    },
+    {
+      "name": "Student Savings Account",
+      "eligibility": "Age 18–25 years",
+      "min_balance": 0,
+      "interest_rate": "3.5% p.a.",
+      "features": ["No minimum balance", "Free education loan counselling", "Discounted locker facility"]
+    }
+  ],
+  "fixed_deposits": {
+    "min_amount": 1000,
+    "max_amount": "No limit",
+    "premature_withdrawal_penalty": {
+      "less_than_1_year": "0.5% reduction on applicable rate",
+      "1_year_or_more": "1.0% reduction on applicable rate",
+      "senior_citizen": "No penalty"
+    },
+    "rates": [
+      {"tenure": "7 days to 14 days", "general_rate": "3.50%", "senior_citizen_rate": "4.00%"},
+      {"tenure": "15 days to 29 days", "general_rate": "3.75%", "senior_citizen_rate": "4.25%"},
+      {"tenure": "30 days to 45 days", "general_rate": "4.00%", "senior_citizen_rate": "4.50%"},
+      {"tenure": "46 days to 90 days", "general_rate": "4.50%", "senior_citizen_rate": "5.00%"},
+      {"tenure": "91 days to 180 days", "general_rate": "5.25%", "senior_citizen_rate": "5.75%"},
+      {"tenure": "181 days to 364 days", "general_rate": "5.75%", "senior_citizen_rate": "6.25%"},
+      {"tenure": "1 year", "general_rate": "6.80%", "senior_citizen_rate": "7.30%"},
+      {"tenure": "1 year 1 day to 18 months", "general_rate": "7.00%", "senior_citizen_rate": "7.50%"},
+      {"tenure": "18 months 1 day to 2 years", "general_rate": "7.20%", "senior_citizen_rate": "7.70%"},
+      {"tenure": "2 years 1 day to 3 years", "general_rate": "7.10%", "senior_citizen_rate": "7.60%"},
+      {"tenure": "3 years 1 day to 5 years", "general_rate": "7.00%", "senior_citizen_rate": "7.50%"},
+      {"tenure": "5 years (Tax-saving FD)", "general_rate": "7.00%", "senior_citizen_rate": "7.50%", "notes": "Lock-in period, 80C benefit up to ₹1.5L, no premature withdrawal"},
+      {"tenure": "5 years 1 day to 10 years", "general_rate": "6.75%", "senior_citizen_rate": "7.25%"}
+    ],
+    "interest_payout_options": ["Cumulative (at maturity)", "Monthly", "Quarterly", "Annual"]
+  },
+  "recurring_deposits": {
+    "min_monthly_instalment": 500,
+    "tenures_available": "6 months to 10 years",
+    "interest_rate_note": "Same as FD rates for corresponding tenure",
+    "features": ["Auto-debit from savings account", "Loan against RD up to 90% of balance", "Premature closure allowed with penalty"]
+  },
+  "credit_cards": [
+    {
+      "name": "LenaDena Classic Credit Card",
+      "annual_fee": 500,
+      "annual_fee_waiver": "On annual spends above ₹50,000",
+      "cashback": "1% on all spends",
+      "credit_limit_range": "₹25,000 – ₹1,00,000",
+      "interest_rate_on_revolving": "3.5% per month (42% per annum)",
+      "late_payment_fee": "₹500 or 2% of outstanding, whichever is higher",
+      "lounge_access": "None",
+      "reward_points": "1 point per ₹100 spent",
+      "eligibility_min_income": "₹20,000/month (salaried)"
+    },
+    {
+      "name": "LenaDena Select Credit Card",
+      "annual_fee": 1500,
+      "annual_fee_waiver": "On annual spends above ₹1,50,000",
+      "cashback": "2% on all spends",
+      "credit_limit_range": "₹50,000 – ₹3,00,000",
+      "interest_rate_on_revolving": "3.25% per month (39% per annum)",
+      "late_payment_fee": "₹750 or 2% of outstanding, whichever is higher",
+      "lounge_access": "4 domestic + 2 international visits per year",
+      "reward_points": "2 points per ₹100 spent",
+      "eligibility_min_income": "₹40,000/month (salaried)"
+    },
+    {
+      "name": "LenaDena Platinum Credit Card",
+      "annual_fee": 3000,
+      "annual_fee_waiver": "On annual spends above ₹3,00,000",
+      "cashback": "3% on all spends",
+      "credit_limit_range": "₹1,00,000 – ₹10,00,000",
+      "interest_rate_on_revolving": "3.0% per month (36% per annum)",
+      "late_payment_fee": "₹1,000 or 2% of outstanding, whichever is higher",
+      "lounge_access": "Unlimited domestic + 6 international per year",
+      "concierge": "24x7 travel and lifestyle concierge",
+      "reward_points": "3 points per ₹100 spent",
+      "eligibility_min_income": "₹75,000/month (salaried) or ₹10L annual (self-employed)"
+    },
+    {
+      "name": "LenaDena Business Credit Card",
+      "annual_fee": 2000,
+      "cashback": "2.5% on business spends",
+      "credit_limit_range": "₹50,000 – ₹5,00,000",
+      "interest_rate_on_revolving": "3.25% per month (39% per annum)",
+      "lounge_access": "4 domestic visits per year",
+      "features": ["Monthly expense reports", "Add-on cards for employees", "GST billing support"],
+      "eligibility": "Self-employed / business owners with turnover above ₹10L"
+    }
+  ],
+  "loans": [
+    {
+      "type": "Home Loan",
+      "max_amount": "₹5 crore",
+      "tenure": "Up to 30 years",
+      "interest_rate_range": "8.50% – 10.25% p.a. (floating)",
+      "processing_fee": "0.5% of loan amount, max ₹20,000",
+      "prepayment_penalty": "Nil for floating rate loans",
+      "min_cibil": 700,
+      "min_age": 21,
+      "max_age_at_maturity": 70
+    },
+    {
+      "type": "Personal Loan",
+      "max_amount": "₹20 lakh",
+      "tenure": "12 to 60 months",
+      "interest_rate_range": "10.50% – 18.00% p.a.",
+      "processing_fee": "1% – 2% of loan amount",
+      "prepayment_penalty": "2% of outstanding after 12 EMIs (nil after 36 EMIs)",
+      "min_cibil": 700,
+      "min_monthly_income_salaried": 25000,
+      "min_annual_income_selfemployed": 300000,
+      "min_age": 21,
+      "max_age": 60
+    },
+    {
+      "type": "Car Loan (New)",
+      "max_amount": "₹30 lakh",
+      "tenure": "12 to 84 months",
+      "interest_rate_range": "8.75% – 11.50% p.a.",
+      "ltv_ratio": "Up to 90% of on-road price",
+      "processing_fee": "₹5,000 flat",
+      "min_cibil": 680
+    },
+    {
+      "type": "Car Loan (Used)",
+      "max_amount": "₹15 lakh",
+      "tenure": "Up to 60 months",
+      "interest_rate_range": "11.00% – 15.00% p.a.",
+      "ltv_ratio": "Up to 80% of valuation",
+      "min_cibil": 700,
+      "vehicle_age_limit": "Car not older than 8 years at loan maturity"
+    },
+    {
+      "type": "Education Loan",
+      "max_amount_india": "₹20 lakh",
+      "max_amount_abroad": "₹75 lakh",
+      "interest_rate_range": "9.00% – 13.00% p.a.",
+      "moratorium": "Course duration + 1 year",
+      "collateral": "Required for loans above ₹7.5 lakh",
+      "subsidy": "Eligible under CSIS scheme for economically weaker sections"
+    },
+    {
+      "type": "Gold Loan",
+      "ltv_ratio": "Up to 75% of gold value",
+      "tenure": "3 months to 36 months",
+      "interest_rate_range": "9.50% – 12.00% p.a.",
+      "processing_fee": "₹500 flat",
+      "min_gold_purity": "18 carat",
+      "disbursement": "Within 30 minutes at branch"
+    }
+  ],
+  "debit_cards": [
+    {
+      "name": "LenaDena Classic Debit Card",
+      "network": "RuPay",
+      "daily_atm_limit": 20000,
+      "daily_pos_limit": 50000,
+      "online_transaction_limit": 25000
+    },
+    {
+      "name": "LenaDena Platinum Debit Card",
+      "network": "Visa Platinum",
+      "daily_atm_limit": 100000,
+      "daily_pos_limit": 200000,
+      "online_transaction_limit": 200000,
+      "lounge_access": "2 domestic airport lounge visits per quarter"
+    }
+  ]
+}

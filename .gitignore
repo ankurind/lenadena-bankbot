@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+chroma_db/
+logs/*.json
+logs/*.jsonl
+logs/*.log
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.DS_Store
+.venv/
+venv/
